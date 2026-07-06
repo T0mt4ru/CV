@@ -1,179 +1,524 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV van Sven Maesen</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        h1 {
-            margin: 0;
-        }
-        .section {
-            margin-bottom: 20px;
-            background-color: #fffde7; /* Lichte gele achtergrond voor de secties */
-            padding: 15px;
-            border-radius: 8px;
-        }
-        .section h2 {
-            border-bottom: 1px solid #ffcc80; /* Oranje accent onder de titels */
-            padding-bottom: 5px;
-        }
-        .contact-info {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .contact-info li {
-            background: #ffe0b2; /* Zachte oranje achtergrond voor contactgegevens */
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .item-list {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        .job, .education {
-            margin-bottom: 15px;
-        }
-        .job h3, .education h3 {
-            margin: 0;
-        }
-        .job p, .education p {
-            margin: 5px 0 0 0;
-            font-style: italic;
-        }
-        .about-me {
-            white-space: pre-wrap;
-        }
-        .download-button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #ff9800; /* Oranje downloadknop */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .download-button:hover {
-            background-color: #f57c00; /* Donkerdere oranje bij hover */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV van Sven Maesen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  :root {
+    --bg:       #0d1117;
+    --surface:  #161b22;
+    --surface2: #1c2330;
+    --border:   rgba(255,255,255,0.07);
+    --border2:  rgba(255,255,255,0.13);
+    --accent:   #5DCAA5;
+    --accent2:  #378ADD;
+    --text:     #e6edf3;
+    --muted:    #768390;
+    --tag-bg:   rgba(93,202,165,0.12);
+    --tag-text: #5DCAA5;
+    --mono:     'Space Mono', monospace;
+    --sans:     'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(93,202,165,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(93,202,165,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  /* ── header ── */
+  header {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--border2);
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .header-left { flex: 1; min-width: 260px; }
+
+  .site-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .site-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  h1 span { color: var(--accent); }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 5px; }
+  .header-meta i { font-size: 13px; }
+  .dot-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+
+  .download-button {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid rgba(93,202,165,0.25);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .download-button:hover {
+    background: rgba(93,202,165,0.2);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ── section header ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+  .section-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--tag-bg);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  section.block { margin-bottom: 3rem; }
+
+  /* ── about ── */
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .about-card p {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    white-space: pre-wrap;
+  }
+
+  /* ── contact grid ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    list-style: none;
+  }
+  .contact-grid li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .contact-grid i {
+    color: var(--accent);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .contact-grid .label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .contact-grid .value {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* ── tag list (vereisten) ── */
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border: 1px solid rgba(93,202,165,0.2);
+  }
+
+  /* ── timeline cards (opleiding / werkervaring) ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .timeline-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1.25rem;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .timeline-card:hover {
+    border-color: var(--border2);
+    background: var(--surface2);
+    transform: translateY(-2px);
+  }
+  .timeline-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--accent);
+    background: var(--tag-bg);
+    flex-shrink: 0;
+  }
+  .timeline-content h3 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 0.35rem;
+  }
+  .timeline-content .meta {
+    font-size: 12px;
+    color: var(--accent);
+    font-family: var(--mono);
+    margin-bottom: 0.35rem;
+  }
+  .timeline-content p.desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── footer ── */
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-brand strong { color: var(--accent); }
+  .footer-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  header { animation: fadeUp 0.5s ease both; }
+  section.block:nth-of-type(1) { animation: fadeUp 0.5s 0.1s ease both; }
+  section.block:nth-of-type(2) { animation: fadeUp 0.5s 0.2s ease both; }
+  section.block:nth-of-type(3) { animation: fadeUp 0.5s 0.3s ease both; }
+  section.block:nth-of-type(4) { animation: fadeUp 0.5s 0.4s ease both; }
+  section.block:nth-of-type(5) { animation: fadeUp 0.5s 0.5s ease both; }
+
+  @media (max-width: 600px) {
+    header { flex-direction: column; }
+    .download-button { width: 100%; justify-content: center; }
+  }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-<div class="container">
-    <div class="header-container">
-        <h1>Sven Maesen</h1>
-        <a href="CV_Maesen_Sven_2026.pdf" download="CV_Maesen_Sven_2026.pdf" class="download-button">Download CV (PDF)</a>
+  <header>
+    <div class="header-left">
+      <p class="site-label">Curriculum Vitae</p>
+      <h1>Sven<span>Maesen</span></h1>
+      <div class="header-meta">
+        <span><i class="ti ti-flask" aria-hidden="true"></i> Chemie</span>
+        <span class="dot-sep"></span>
+        <span><i class="ti ti-school" aria-hidden="true"></i> Onderwijs</span>
+        <span class="dot-sep"></span>
+        <span><i class="ti ti-map-pin" aria-hidden="true"></i> Bilzen-Hoeselt</span>
+      </div>
     </div>
+    <a href="CV_Maesen_Sven_2026.pdf" download="CV_Maesen_Sven_2026.pdf" class="download-button">
+      <i class="ti ti-download" aria-hidden="true"></i> Download CV (PDF)
+    </a>
+  </header>
 
-    <div class="section">
-        <h2>Contactgegevens</h2>
-        <ul class="contact-info">
-            <li><strong>Adres:</strong> Broekstraat 10, 3730 Bilzen-Hoeselt</li>
-            <li><strong>Telefoon:</strong> 04 84 86 62 15</li>
-            <li><strong>E-mail:</strong> sven.maesen@gmail.com</li>
-        </ul>
+  <!-- Contact -->
+  <section class="block">
+    <div class="section-header">
+      <span class="section-title">Contactgegevens</span>
     </div>
+    <ul class="contact-grid">
+      <li>
+        <i class="ti ti-map-pin" aria-hidden="true"></i>
+        <span>
+          <span class="label">Adres</span>
+          <span class="value">Broekstraat 10, 3730 Bilzen-Hoeselt</span>
+        </span>
+      </li>
+      <li>
+        <i class="ti ti-phone" aria-hidden="true"></i>
+        <span>
+          <span class="label">Telefoon</span>
+          <span class="value">04 84 86 62 15</span>
+        </span>
+      </li>
+      <li>
+        <i class="ti ti-mail" aria-hidden="true"></i>
+        <span>
+          <span class="label">E-mail</span>
+          <span class="value">sven.maesen@gmail.com</span>
+        </span>
+      </li>
+    </ul>
+  </section>
 
-    <div class="section">
-        <h2>Over mij</h2>
-        <p class="about-me">Gedreven en ervaren professional met een unieke achtergrond in de chemische industrie, die na een carrièreswitch nu met passie de overstap maakt naar het onderwijs. Met jarenlange praktijkervaring als Chemical Reactor Operator, inclusief expertise in procesbeheer, grondstoffenmanagement en veiligheid, breng ik de theorie tot leven door concrete links te leggen met de werkelijke chemische omgeving. Als leerkracht ben ik praktisch, aanspreekbaar en visueel ingesteld, en streef ik ernaar leerlingen te motiveren door interactieve lessen en stapsgewijze uitleg die van simpele concepten naar meer abstracte ideeën evolueren. Mijn drijfveer is niet alleen het overbrengen van mijn kennis van chemie maar ook het actief bijdragen aan de vorming van de toekomstige samenleving. Ik zoek een schoolomgeving die teamwork, ondersteuning en ruimte voor eigen initiatief biedt.</p>
+  <!-- Over mij -->
+  <section class="block">
+    <div class="section-header">
+      <span class="section-title">Over mij</span>
     </div>
-
-    <div class="section">
-        <h2>Behaalde Vereisten</h2>
-        <ul class="item-list">
-            <li>Leerkracht Chemie</li>
-            <li>Leerkracht Natuurwetenschappen (1ste graad)</li>
-            <li>Leerkracht STEM</li>
-        </ul>
+    <div class="about-card">
+      <p>Gedreven en ervaren professional met een unieke achtergrond in de chemische industrie, die na een carrièreswitch nu met passie de overstap maakt naar het onderwijs. Met jarenlange praktijkervaring als Chemical Reactor Operator, inclusief expertise in procesbeheer, grondstoffenmanagement en veiligheid, breng ik de theorie tot leven door concrete links te leggen met de werkelijke chemische omgeving. Als leerkracht ben ik praktisch, aanspreekbaar en visueel ingesteld, en streef ik ernaar leerlingen te motiveren door interactieve lessen en stapsgewijze uitleg die van simpele concepten naar meer abstracte ideeën evolueren. Mijn drijfveer is niet alleen het overbrengen van mijn kennis van chemie maar ook het actief bijdragen aan de vorming van de toekomstige samenleving. Ik zoek een schoolomgeving die teamwork, ondersteuning en ruimte voor eigen initiatief biedt.</p>
     </div>
+  </section>
 
-    <div class="section">
-        <h2>Opleidingen</h2>
-        <div class="education">
-            <h3>Extra Lesbevoegdheid Chemie</h3>
-            <p>UCLL - Campus Diepenbeek (2024-2025)</p>
-        </div>
-        <div class="education">
-            <h3>Verkorte Educatieve Bachelor</h3>
-            <p>UCLL Campus Diepenbeek (2023-2024)</p>
-        </div>
-        <div class="education">
-            <h3>Professionele Bachelor Chemie Procestechnieken</h3>
-            <p>KHLim Campus Diepenbeek (2006-2009)</p>
-        </div>
-        <div class="education">
-            <h3>Secundair Onderwijs Techniek - Wetenschappen</h3>
-            <p>IKSO Hoeselt (2000-2006)</p>
-        </div>
+  <!-- Behaalde vereisten -->
+  <section class="block">
+    <div class="section-header">
+      <span class="section-title">Behaalde vereisten</span>
     </div>
-
-    <div class="section">
-        <h2>Werkervaring</h2>
-        <div class ="job">
-            <h3>Vervanger Leerkracht Chemie</h3>
-            <p>2de en 3de graad doorstroom</p>
-            <p>Pyxis College Lanaken (Feb 2026 - Juni 2026)</p>
-        </div>
-        <div class ="job">
-            <h3>Vervanger Leerkracht Chemie</h3>
-            <p>2de graad doorstroom</p>
-            <p>Atlas College Genk (Okt 2025)</p>
-        </div>
-        <div class="job">
-            <h3>Stagiair Leerkracht Chemie & Biotechnologie</h3>
-            <p>Provenciaal Instituut voor Biotechnisch Onderwijs (Apr 2025 - Mei 2025)</p>
-        </div>
-        <div class="job">
-            <h3>Stagiair Leerkracht Natuurwetenschappen</h3>
-            <p>Sint Jozef Instituut Bokrijk (Jan 2025 - Feb 2025)</p>
-        </div>
-        <div class="job">
-            <h3>Stagiair Leerkracht Chemie</h3>
-            <p>Instituut Katholiek Secundair Onderwijs Hoeselt (Apr 2024 - Mei 2024)</p>
-        </div>
-        <div class="job">
-            <h3>Stagiair Leerkracht Chemie</h3>
-            <p>Sint Jozef Instituut Bokrijk (Jan 2024 - Apr 2024)</p>
-        </div>
-        <div class="job">
-            <h3>Operator Chemische Reactoren</h3>
-            <p>Sumitomo Bakelite High Performance Plastics (Jan 2010 - Sep 2023)</p>
-            <p>Bedienen van reactoren bij de productie van fenol-formaldehyde harsen.</p>
-        </div>
+    <div class="tag-row">
+      <span class="tag">Leerkracht Chemie</span>
+      <span class="tag">Leerkracht Natuurwetenschappen (1ste graad)</span>
+      <span class="tag">Leerkracht STEM</span>
     </div>
-</div>
+  </section>
 
+  <!-- Opleidingen -->
+  <section class="block">
+    <div class="section-header">
+      <span class="section-title">Opleidingen</span>
+      <span class="section-count" id="edu-count"></span>
+    </div>
+    <div class="timeline" id="edu-timeline">
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Extra Lesbevoegdheid Chemie</h3>
+          <p class="meta">UCLL — Campus Diepenbeek · 2024–2025</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Verkorte Educatieve Bachelor</h3>
+          <p class="meta">UCLL — Campus Diepenbeek · 2023–2024</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Professionele Bachelor Chemie Procestechnieken</h3>
+          <p class="meta">KHLim — Campus Diepenbeek · 2006–2009</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Secundair Onderwijs Techniek — Wetenschappen</h3>
+          <p class="meta">IKSO Hoeselt · 2000–2006</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Werkervaring -->
+  <section class="block">
+    <div class="section-header">
+      <span class="section-title">Werkervaring</span>
+      <span class="section-count" id="job-count"></span>
+    </div>
+    <div class="timeline" id="job-timeline">
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Vervanger Leerkracht Chemie</h3>
+          <p class="meta">Pyxis College Lanaken · Feb 2026 – Juni 2026</p>
+          <p class="desc">2de en 3de graad doorstroom</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Vervanger Leerkracht Chemie</h3>
+          <p class="meta">Atlas College Genk · Okt 2025</p>
+          <p class="desc">2de graad doorstroom</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Stagiair Leerkracht Chemie & Biotechnologie</h3>
+          <p class="meta">Provinciaal Instituut voor Biotechnisch Onderwijs · Apr 2025 – Mei 2025</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Stagiair Leerkracht Natuurwetenschappen</h3>
+          <p class="meta">Sint Jozef Instituut Bokrijk · Jan 2025 – Feb 2025</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Stagiair Leerkracht Chemie</h3>
+          <p class="meta">Instituut Katholiek Secundair Onderwijs Hoeselt · Apr 2024 – Mei 2024</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Stagiair Leerkracht Chemie</h3>
+          <p class="meta">Sint Jozef Instituut Bokrijk · Jan 2024 – Apr 2024</p>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+        <div class="timeline-content">
+          <h3>Operator Chemische Reactoren</h3>
+          <p class="meta">Sumitomo Bakelite High Performance Plastics · Jan 2010 – Sep 2023</p>
+          <p class="desc">Bedienen van reactoren bij de productie van fenol-formaldehyde harsen.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-brand"><strong>Sven Maesen</strong>  Curriculum Vitae</span>
+    <span class="footer-note">Laatst bijgewerkt — 2026</span>
+  </footer>
+
+</div><!-- /wrap -->
+
+<script>
+  document.getElementById('edu-count').textContent =
+    document.querySelectorAll('#edu-timeline .timeline-card').length + ' items';
+  document.getElementById('job-count').textContent =
+    document.querySelectorAll('#job-timeline .timeline-card').length + ' items';
+</script>
 </body>
 </html>
